@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Would You Like Me?</title>
+<style>
+body {
+    margin: 0;
+    height: 100vh;
+    background: linear-gradient(135deg, #8e129a, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    position: relative;
+}
+
+.container {
+    text-align: center;
+    position: relative;
+}
+
+h1 {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 80px; /* Buttons neeche aayen */
+}
+
+/* Buttons initially below the question */
+button {
+    padding: 12px 25px;
+    font-size: 1.1rem;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    position: absolute;
+    transition: all 0.3s ease;
+}
+
+#yes {
+    background: #ff0033;
+    color: white;
+    top: 100px;   /* question ke neeche */
+    left: 60%;
+}
+
+#no {
+    background: #42714b;
+    color: white;
+    top: 100px;   /* question ke neeche */
+    left: 25%;
+}
+
+/* Heart animation */
+.heart {
+    position: absolute;
+    font-size: 24px;
+    animation: fly 4s linear forwards;
+}
+
+@keyframes fly {
+    0% { transform: translateY(0); opacity: 1; }
+    100% { transform: translateY(-800px); opacity: 0; }
+}
+</style>
+</head>
+<body>
+<div class="container">
+    <h1 id="question">Would you like me?</h1>
+    <button id="yes">Yes ❤️</button>
+    <button id="no">No ❌</button>
+</div>
+
+<script>
+let noStage = 0;
+const question = document.getElementById("question");
+const noBtn = document.getElementById("no");
+const yesBtn = document.getElementById("yes");
+
+noBtn.onclick = () => {
+    noStage++;
+    if(noStage === 1){
+        noBtn.style.top = "80px";
+        noBtn.style.left = "10px";
+        noBtn.innerText = "Try again 😅";
+    } else if(noStage === 2){
+        noBtn.style.top = "10px";
+        noBtn.style.left = "110%";
+        noBtn.innerText = "One's again, try please 😬";
+    } else if(noStage === 3){
+        noBtn.style.top = "120%";
+        noBtn.style.left = "10px";
+        noBtn.innerText = "Your efforts are lost 😌\press yes";
+    }
+};
+
+yesBtn.onclick = () => {
+    question.innerText = "I'm also likes you ❤️ ";
+    noBtn.style.display = "none";
+    yesBtn.style.display = "none";
+    startHearts();
+};
+
+function startHearts() {
+    const interval = setInterval(createHeart, 200);
+    setTimeout(() => clearInterval(interval), 10000); // 20 seconds
+}
+
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerText = "IQRA❤️";
+    heart.style.left = Math.random() * window.innerWidth + "px";
+    heart.style.bottom = "0px";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 4000);
+}
+</script>
+</body>
+</html>
